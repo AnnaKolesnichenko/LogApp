@@ -13,27 +13,24 @@ import {
 } from "react-native";
 
 import backImage from "../images/pic.jpg";
-import plus from "../images/add.jpg";
 import { useState } from "react";
 import { AntDesign } from "@expo/vector-icons";
+
+import EmailTextInput from "../components/TextInputs/EmailTextInput";
+import LoginTextInput from "../components/TextInputs/LoginTextInput";
+import PasswordTextInput from "../components/TextInputs/PasswordTextInput";
 
 const RegistrationScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [login, setLogin] = useState("");
   const [passVisible, setPassVisible] = useState(true);
-  const [loginFocused, setLoginFocused] = useState(false);
-  const [emailFocused, setEmailFocused] = useState(false);
+  // const [loginFocused, setLoginFocused] = useState(false);
+  // const [emailFocused, setEmailFocused] = useState(false);
   const [passFocused, setPassFocused] = useState(false);
 
-  const data = {
-    login,
-    email,
-    password,
-  };
-
   const getInputData = () => {
-    console.log(data);
+    console.log({ email, login, password });
   };
 
   const pressHandler = () => {
@@ -59,62 +56,10 @@ const RegistrationScreen = ({ navigation }) => {
                 </Pressable>
               </View>
               <Text style={styles.registrationTitle}>Реєстрація</Text>
-              <TextInput
-                style={[
-                  styles.input,
-                  {
-                    borderColor: loginFocused ? "#FF6C00" : "#ede8e8",
-                    backgroundColor: loginFocused ? "white" : "#f9f4f4",
-                  },
-                ]}
-                keyboardType="default"
-                placeholder="Логін"
-                value={login}
-                onChangeText={setLogin}
-                onFocus={() => setLoginFocused(true)}
-                onBlur={() => setLoginFocused(false)}
-              />
-              <TextInput
-                style={[
-                  styles.input,
-                  {
-                    borderColor: emailFocused ? "#FF6C00" : "#ede8e8",
-                    backgroundColor: emailFocused ? "white" : "#f9f4f4",
-                  },
-                ]}
-                keyboardType="email-address"
-                placeholder="Адреса електронної пошти"
-                value={email}
-                onChangeText={setEmail}
-                onFocus={() => setEmailFocused(true)}
-                onBlur={() => setEmailFocused(false)}
-              />
-              <View style={styles.showPassInput}>
-                <TextInput
-                  style={[
-                    styles.input,
-                    {
-                      borderColor: passFocused ? "#FF6C00" : "#ede8e8",
-                      backgroundColor: passFocused ? "white" : "#f9f4f4",
-                    },
-                  ]}
-                  keyboardType="visible-password"
-                  placeholder="Пароль"
-                  value={password}
-                  secureTextEntry={passVisible}
-                  onChangeText={setPassword}
-                  onFocus={() => setPassFocused(true)}
-                  onBlur={() => setPassFocused(false)}
-                />
-                <TouchableOpacity
-                  style={styles.toggleButton}
-                  onPress={showPassword}
-                >
-                  <Text style={styles.toggleButtonText}>
-                    {passVisible ? "Показати" : "Сховати"}
-                  </Text>
-                </TouchableOpacity>
-              </View>
+
+              <LoginTextInput value={login} onChangeText={setLogin} />
+              <EmailTextInput value={email} onChangeText={setEmail} />
+              <PasswordTextInput value={password} onChangeText={setPassword} />
 
               <View style={styles.outerContainer}>
                 <Pressable

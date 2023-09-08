@@ -15,28 +15,19 @@ import {
 import backImage from "../images/pic.jpg";
 import { useState } from "react";
 
+import EmailTextInput from "../components/TextInputs/EmailTextInput";
+import PasswordTextInput from "../components/TextInputs/PasswordTextInput";
+
 const LoginScreen = ({ navigation }) => {
   const [emailText, setEmailText] = useState("");
   const [passwordText, setPasswordText] = useState("");
-  const [passVisible, setPassVisible] = useState(true);
-  const [emailFocused, setEmailFocused] = useState(false);
-  const [passFocused, setPassFocused] = useState(false);
-
-  const data = {
-    email: emailText,
-    pass: passwordText,
-  };
 
   const pressHandler = () => {
     navigation.navigate("Registration");
   };
 
   const getInputData = () => {
-    console.log(emailText, passwordText);
-  };
-
-  const showPassword = () => {
-    setPassVisible(!passVisible);
+    console.log({ emailText, passwordText });
   };
 
   return (
@@ -48,47 +39,14 @@ const LoginScreen = ({ navigation }) => {
         <ImageBackground style={styles.mainScreen} source={backImage}>
           <View style={styles.loginContainer} onSubmi>
             <Text style={styles.loginTitle}>Увійти</Text>
-            <TextInput
-              style={[
-                styles.input,
-                {
-                  borderColor: emailFocused ? "#FF6C00" : "#ede8e8",
-                  backgroundColor: emailFocused ? "white" : "#f9f4f4",
-                },
-              ]}
-              keyboardType="email-address"
-              placeholder="Адреса електронної пошти"
-              value={emailText}
-              onChangeText={setEmailText}
-              onFocus={() => setEmailFocused(true)}
-              onBlur={() => setEmailFocused(false)}
+
+            <EmailTextInput value={emailText} onChangeText={setEmailText} />
+
+            <PasswordTextInput
+              value={passwordText}
+              onChangeText={setPasswordText}
             />
-            <View style={styles.showPassInput}>
-              <TextInput
-                style={[
-                  styles.input,
-                  {
-                    borderColor: passFocused ? "#FF6C00" : "#ede8e8",
-                    backgroundColor: passFocused ? "white" : "#f9f4f4",
-                  },
-                ]}
-                keyboardType="visible-password"
-                placeholder="Пароль"
-                value={passwordText}
-                secureTextEntry={passVisible}
-                onChangeText={setPasswordText}
-                onFocus={() => setPassFocused(true)}
-                onBlur={() => setPassFocused(false)}
-              />
-              <TouchableOpacity
-                style={styles.toggleButton}
-                onPress={showPassword}
-              >
-                <Text style={styles.toggleButtonText}>
-                  {passVisible ? "Показати" : "Сховати"}
-                </Text>
-              </TouchableOpacity>
-            </View>
+
             <View style={styles.outerContainer}>
               <Pressable
                 onPress={getInputData}
@@ -154,31 +112,6 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
 
-  input: {
-    marginTop: 15,
-    padding: 10,
-    width: "100%",
-    height: 50,
-    backgroundColor: "#f9f4f4",
-    borderColor: "#ede8e8",
-    borderWidth: 1,
-    borderRadius: 10,
-  },
-  showPassInput: {
-    flexDirection: "row",
-    alignItems: "center",
-  },
-  toggleButton: {
-    paddingHorizontal: 15,
-    paddingTop: 10,
-    position: "absolute",
-    right: 0,
-  },
-  toggleButtonText: {
-    fontSize: 12,
-    fontWeight: "600",
-    color: "#3d4044",
-  },
   outerContainer: {
     width: "100%",
     alignItems: "center",
