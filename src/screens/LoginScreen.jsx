@@ -15,12 +15,12 @@ import {
 import backImage from "../images/pic.jpg";
 import { useState } from "react";
 
-import EmailTextInput from "../components/TextInputs/EmailTextInput";
-import PasswordTextInput from "../components/TextInputs/PasswordTextInput";
+import InputType from "../components/TextInputs/InputType";
 
 const LoginScreen = ({ navigation }) => {
   const [emailText, setEmailText] = useState("");
   const [passwordText, setPasswordText] = useState("");
+  const [passVisible, setPassVisible] = useState(true);
 
   const pressHandler = () => {
     navigation.navigate("Registration");
@@ -28,6 +28,10 @@ const LoginScreen = ({ navigation }) => {
 
   const getInputData = () => {
     console.log({ emailText, passwordText });
+  };
+
+  const showPassword = () => {
+    setPassVisible(!passVisible);
   };
 
   return (
@@ -40,12 +44,29 @@ const LoginScreen = ({ navigation }) => {
           <View style={styles.loginContainer} onSubmi>
             <Text style={styles.loginTitle}>Увійти</Text>
 
-            <EmailTextInput value={emailText} onChangeText={setEmailText} />
-
-            <PasswordTextInput
-              value={passwordText}
-              onChangeText={setPasswordText}
+            <InputType
+              value={emailText}
+              onChangeText={setEmailText}
+              placeholder={"Адреса електронної пошти"}
+              keyboardType={"email-address"}
             />
+            <View style={styles.showPassInput}>
+              <InputType
+                secureTextEntry={passVisible}
+                value={passwordText}
+                onChangeText={setPasswordText}
+                placeholder={"Пароль"}
+                keyboardType={"visible-password"}
+              />
+              <TouchableOpacity
+                style={styles.toggleButton}
+                onPress={showPassword}
+              >
+                <Text style={styles.toggleButtonText}>
+                  {passVisible ? "Показати" : "Сховати"}
+                </Text>
+              </TouchableOpacity>
+            </View>
 
             <View style={styles.outerContainer}>
               <Pressable
@@ -140,6 +161,23 @@ const styles = StyleSheet.create({
   },
   pressedBtn: {
     opacity: 0.6,
+  },
+  showPassInput: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    width: "100%",
+  },
+  toggleButton: {
+    paddingHorizontal: 15,
+    paddingTop: 10,
+    position: "absolute",
+    right: 0,
+  },
+  toggleButtonText: {
+    fontSize: 12,
+    fontWeight: "600",
+    color: "#3d4044",
   },
 });
 

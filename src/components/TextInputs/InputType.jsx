@@ -2,24 +2,31 @@ import { StyleSheet } from "react-native";
 import { useState } from "react";
 import { TextInput } from "react-native";
 
-const EmailTextInput = ({ value, onChangeText }) => {
-  const [emailFocused, setEmailFocused] = useState(false);
+const InputType = ({
+  value,
+  onChangeText,
+  placeholder,
+  keyboardType,
+  secureTextEntry,
+}) => {
+  const [loginFocused, setLoginFocused] = useState(false);
 
   return (
     <TextInput
       style={[
         styles.input,
         {
-          borderColor: emailFocused ? "#FF6C00" : "#ede8e8",
-          backgroundColor: emailFocused ? "white" : "#f9f4f4",
+          borderColor: loginFocused ? "#FF6C00" : "#ede8e8",
+          backgroundColor: loginFocused ? "white" : "#f9f4f4",
         },
       ]}
-      keyboardType="email-address"
-      placeholder="Адреса електронної пошти"
+      keyboardType={keyboardType}
+      secureTextEntry={secureTextEntry}
+      placeholder={placeholder}
       value={value}
       onChangeText={onChangeText}
-      onFocus={() => setEmailFocused(true)}
-      onBlur={() => setEmailFocused(false)}
+      onFocus={() => setLoginFocused(true)}
+      onBlur={() => setLoginFocused(false)}
     />
   );
 };
@@ -36,5 +43,4 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
 });
-
-export default EmailTextInput;
+export default InputType;
