@@ -22,12 +22,18 @@ const LoginScreen = ({ navigation }) => {
   const [passwordText, setPasswordText] = useState("");
   const [passVisible, setPassVisible] = useState(true);
 
+  const clearInputs = () => {
+    setEmailText("");
+    setPasswordText("");
+  };
+
   const pressHandler = () => {
     navigation.navigate("Registration");
   };
 
   const getInputData = () => {
     console.log({ emailText, passwordText });
+    clearInputs();
   };
 
   const showPassword = () => {
@@ -39,6 +45,7 @@ const LoginScreen = ({ navigation }) => {
       <KeyboardAvoidingView
         behavior={Platform.OS == "ios" ? "padding" : "height"}
         style={styles.container}
+        keyboardVerticalOffset={-270}
       >
         <ImageBackground style={styles.mainScreen} source={backImage}>
           <View style={styles.loginContainer} onSubmi>

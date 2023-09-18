@@ -24,8 +24,15 @@ const RegistrationScreen = ({ navigation }) => {
   const [login, setLogin] = useState("");
   const [passVisible, setPassVisible] = useState(true);
 
+  const clearInputs = () => {
+    setEmail("");
+    setPassword("");
+    setLogin("");
+  };
+
   const getInputData = () => {
     console.log({ email, login, password });
+    clearInputs();
   };
 
   const pressHandler = () => {
@@ -41,6 +48,7 @@ const RegistrationScreen = ({ navigation }) => {
       <KeyboardAvoidingView
         behavior={Platform.OS == "ios" ? "padding" : "height"}
         style={styles.container}
+        keyboardVerticalOffset={-200}
       >
         <View style={styles.container}>
           <ImageBackground style={styles.mainScreen} source={backImage}>
