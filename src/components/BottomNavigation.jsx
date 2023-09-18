@@ -12,7 +12,7 @@ import ProfileScreen from "../screens/ProfileScreen";
 
 const BottomTabs = createBottomTabNavigator();
 
-const BottomNavigation = () => {
+export default function BottomNavigation() {
   return (
     <BottomTabs.Navigator
       screenOptions={({ navigation }) => ({
@@ -71,7 +71,7 @@ const BottomNavigation = () => {
       />
     </BottomTabs.Navigator>
   );
-};
+}
 
 const styles = StyleSheet.create({
   tabIcon: {
@@ -86,4 +86,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default BottomNavigation;
+// export default BottomNavigation;

@@ -1,8 +1,16 @@
 import React from "react";
-import { View } from "react-native";
+import { View, StyleSheet } from "react-native";
 
 const CommentsScreen = () => {
-  return <View>CommentsScreen</View>;
+  return <View style={styles.container}>CommentsScreen</View>;
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+});
 
 export default CommentsScreen;
