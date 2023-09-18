@@ -1,7 +1,8 @@
 import React from "react";
+import { View } from "react-native";
 
 const CommentsScreen = () => {
-  return <div>CommentsScreen</div>;
+  return <View>CommentsScreen</View>;
 };
 
 export default CommentsScreen;

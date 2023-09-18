@@ -1,6 +1,6 @@
 import React from "react";
 
-export const MapScreen = () => {
+const MapScreen = () => {
   return <div>MapScreen</div>;
 };
 

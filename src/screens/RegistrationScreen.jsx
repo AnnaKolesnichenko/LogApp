@@ -16,7 +16,7 @@ import backImage from "../images/pic.jpg";
 import { useState } from "react";
 import { AntDesign } from "@expo/vector-icons";
 
-import InputType from "../components/TextInputs/InputType";
+import InputType from "../components/InputType";
 
 const RegistrationScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
@@ -33,6 +33,7 @@ const RegistrationScreen = ({ navigation }) => {
   const getInputData = () => {
     console.log({ email, login, password });
     clearInputs();
+    navigation.navigate("Home", {});
   };
 
   const pressHandler = () => {

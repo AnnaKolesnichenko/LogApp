@@ -15,7 +15,7 @@ import {
 import backImage from "../images/pic.jpg";
 import { useState } from "react";
 
-import InputType from "../components/TextInputs/InputType";
+import InputType from "../components/InputType";
 
 const LoginScreen = ({ navigation }) => {
   const [emailText, setEmailText] = useState("");
@@ -34,6 +34,7 @@ const LoginScreen = ({ navigation }) => {
   const getInputData = () => {
     console.log({ emailText, passwordText });
     clearInputs();
+    navigation.navigate("Home");
   };
 
   const showPassword = () => {

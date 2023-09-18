@@ -1,7 +1,8 @@
 import React from "react";
+import { Text } from "react-native";
 
 const CreatePostsScreen = () => {
-  return <div>CreatePostsScreen</div>;
+  return <Text>пуеештп иуееук</Text>;
 };
 
 export default CreatePostsScreen;
