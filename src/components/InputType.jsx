@@ -8,6 +8,7 @@ const InputType = ({
   placeholder,
   keyboardType,
   secureTextEntry,
+  autoCapitalize,
 }) => {
   const [loginFocused, setLoginFocused] = useState(false);
 
@@ -25,6 +26,7 @@ const InputType = ({
       placeholder={placeholder}
       value={value}
       onChangeText={onChangeText}
+      autoCapitalize={autoCapitalize}
       onFocus={() => setLoginFocused(true)}
       onBlur={() => setLoginFocused(false)}
     />

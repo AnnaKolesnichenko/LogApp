@@ -46,7 +46,7 @@ const LoginScreen = ({ navigation }) => {
       <KeyboardAvoidingView
         behavior={Platform.OS == "ios" ? "padding" : "height"}
         style={styles.container}
-        keyboardVerticalOffset={-270}
+        keyboardVerticalOffset={-50}
       >
         <ImageBackground style={styles.mainScreen} source={backImage}>
           <View style={styles.loginContainer} onSubmi>
@@ -65,6 +65,7 @@ const LoginScreen = ({ navigation }) => {
                 onChangeText={setPasswordText}
                 placeholder={"Пароль"}
                 keyboardType={"visible-password"}
+                autoCapitalize={"none"}
               />
               <TouchableOpacity
                 style={styles.toggleButton}
