@@ -22,7 +22,7 @@ const RegistrationScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [login, setLogin] = useState("");
-  const [passVisible, setPassVisible] = useState(true);
+  const [passVisible, setPassVisible] = useState(false);
 
   const clearInputs = () => {
     setEmail("");
@@ -77,7 +77,7 @@ const RegistrationScreen = ({ navigation }) => {
 
               <View style={styles.showPassInput}>
                 <InputType
-                  secureTextEntry={passVisible}
+                  secureTextEntry={!passVisible}
                   value={password}
                   onChangeText={setPassword}
                   placeholder={"Пароль"}
@@ -89,7 +89,7 @@ const RegistrationScreen = ({ navigation }) => {
                   onPress={showPassword}
                 >
                   <Text style={styles.toggleButtonText}>
-                    {passVisible ? "Показати" : "Сховати"}
+                    {!passVisible ? "Показати" : "Сховати"}
                   </Text>
                 </TouchableOpacity>
               </View>

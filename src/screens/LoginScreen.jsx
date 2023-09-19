@@ -20,7 +20,7 @@ import InputType from "../components/InputType";
 const LoginScreen = ({ navigation }) => {
   const [emailText, setEmailText] = useState("");
   const [passwordText, setPasswordText] = useState("");
-  const [passVisible, setPassVisible] = useState(true);
+  const [passVisible, setPassVisible] = useState(false);
 
   const clearInputs = () => {
     setEmailText("");
@@ -60,7 +60,7 @@ const LoginScreen = ({ navigation }) => {
             />
             <View style={styles.showPassInput}>
               <InputType
-                secureTextEntry={passVisible}
+                secureTextEntry={!passVisible}
                 value={passwordText}
                 onChangeText={setPasswordText}
                 placeholder={"Пароль"}
@@ -72,7 +72,7 @@ const LoginScreen = ({ navigation }) => {
                 onPress={showPassword}
               >
                 <Text style={styles.toggleButtonText}>
-                  {passVisible ? "Показати" : "Сховати"}
+                  {!passVisible ? "Показати" : "Сховати"}
                 </Text>
               </TouchableOpacity>
             </View>
