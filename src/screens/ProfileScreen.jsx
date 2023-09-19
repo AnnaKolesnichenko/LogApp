@@ -1,9 +1,21 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Text, View, StyleSheet } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
-const ProfileScreen = () => {
+const ProfileScreen = ({ route }) => {
+  const title = route.name;
+  const navigation = useNavigation();
+
+  useEffect(() => {
+    navigation.setOptions({
+      title: "Profile",
+    });
+  }, []);
   return (
     <View style={styles.container}>
+      <View style={styles.header}>
+        <Text>{title}</Text>
+      </View>
       <Text>ProfileScreen</Text>
     </View>
   );
@@ -14,6 +26,9 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+  },
+  header: {
+    marginTop: 30,
   },
 });
 

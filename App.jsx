@@ -42,6 +42,20 @@ export const BottomNavigation = () => {
         name="Posts"
         component={PostsScreen}
         options={({ navigation }) => ({
+          headerRight: ({ color }) => {
+            return (
+              <View style={styles.logOut}>
+                <Pressable
+                  style={({ pressed }) => pressed && styles.pressedLogout}
+                  onPress={() => {
+                    navigation.navigate("Login");
+                  }}
+                >
+                  <MaterialIcons name="logout" size={22} color="grey" />
+                </Pressable>
+              </View>
+            );
+          },
           tabBarIcon: ({ color, size }) => (
             <View style={styles.tabIcon}>
               <Pressable
@@ -60,6 +74,20 @@ export const BottomNavigation = () => {
         name="Create Posts"
         component={CreatePostsScreen}
         options={({ navigation }) => ({
+          headerRight: ({ color }) => {
+            return (
+              <View style={styles.logOut}>
+                <Pressable
+                  style={({ pressed }) => pressed && styles.pressedLogout}
+                  onPress={() => {
+                    navigation.navigate("Login");
+                  }}
+                >
+                  <MaterialIcons name="logout" size={22} color="grey" />
+                </Pressable>
+              </View>
+            );
+          },
           tabBarIcon: ({ color, size }) => (
             <View style={styles.tabIcon}>
               <Pressable
@@ -77,9 +105,21 @@ export const BottomNavigation = () => {
       <BottomTabs.Screen
         name="Profile"
         component={ProfileScreen}
-        options={({ navigation }) => ({
-          title: "Profile",
-          tabBarLabel: "Posts",
+        options={({ navigation, route }) => ({
+          headerRight: ({ color }) => {
+            return (
+              <View style={styles.logOut}>
+                <Pressable
+                  style={({ pressed }) => pressed && styles.pressedLogout}
+                  onPress={() => {
+                    navigation.navigate("Login");
+                  }}
+                >
+                  <MaterialIcons name="logout" size={22} color="grey" />
+                </Pressable>
+              </View>
+            );
+          },
           tabBarIcon: ({ color, size }) => (
             <View style={styles.tabIcon}>
               <Pressable
@@ -107,7 +147,7 @@ export default function App() {
           initialRouteName="Login"
           screenOptions={({ navigation }) => ({
             headerTransparent: true,
-            title: "",
+            // title: "",
             headerStyle: {
               backgroundColor: "transparent",
               borderBottomColor: "grey",
@@ -118,26 +158,16 @@ export default function App() {
           <Stack.Screen
             name="Home"
             component={BottomNavigation}
-            options={({ navigation }) => ({
-              headerRight: ({ color }) => {
-                return (
-                  <View style={styles.logOut}>
-                    <Pressable
-                      style={({ pressed }) => pressed && styles.pressedLogout}
-                      onPress={() => {
-                        navigation.navigate("Login");
-                      }}
-                    >
-                      <MaterialIcons name="logout" size={22} color="grey" />
-                    </Pressable>
-                  </View>
-                );
-              },
-            })}
+            options={{
+              headerShown: false,
+            }}
           />
           <Stack.Screen
             name="Registration"
             component={RegistrationScreen}
+            options={{
+              headerShown: false,
+            }}
             screenOptions={{
               headerTransparent: true,
               headerShown: false,
@@ -149,6 +179,9 @@ export default function App() {
           <Stack.Screen
             name="Login"
             component={LoginScreen}
+            options={{
+              headerShown: false,
+            }}
             screenOptions={{
               headerTransparent: true,
               headerShown: false,
@@ -157,7 +190,6 @@ export default function App() {
               },
             }}
           />
-          {/* <Stack.Screen name="Home" component={HomeScreen} /> */}
         </Stack.Navigator>
       </NavigationContainer>
     </>
