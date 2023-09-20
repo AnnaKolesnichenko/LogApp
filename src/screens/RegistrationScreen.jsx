@@ -44,6 +44,10 @@ const RegistrationScreen = ({ navigation }) => {
     setPassVisible(!passVisible);
   };
 
+  const handleImagePicker = () => {
+    console.log("image to be added...");
+  };
+
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <KeyboardAvoidingView
@@ -54,11 +58,14 @@ const RegistrationScreen = ({ navigation }) => {
         <View style={styles.container}>
           <ImageBackground style={styles.mainScreen} source={backImage}>
             <View style={styles.registrationContainer}>
-              <View style={styles.plusSquare}>
+              <TouchableOpacity
+                style={styles.plusSquare}
+                onPress={handleImagePicker}
+              >
                 <Pressable style={styles.plusPressed}>
                   <AntDesign name="pluscircleo" size={26} color="orange" />
                 </Pressable>
-              </View>
+              </TouchableOpacity>
               <Text style={styles.registrationTitle}>Реєстрація</Text>
 
               <InputType

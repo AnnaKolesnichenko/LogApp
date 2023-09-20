@@ -1,0 +1,37 @@
+[
+  {
+    "title": "Ліс",
+    "image": "https://domf5oio6qrcr.cloudfront.net/medialibrary/10190/conversions/GettyImages-499689946-thumb.jpg",
+    "comments": 3,
+    "location": "Kherson Region, Ukraine",
+    "id": "i1"
+  },
+  {
+    "title": "Море",
+    "image": "https://earthsky.org/upl/2023/06/Sunset-Shells-Christy-Mandeville-Feb-9-2023.jpg",
+    "comments": 4,
+    "location": "Odessa Region, Ukraine",
+    "id": "i2"
+  },
+  {
+    "title": "Захід сонця",
+    "image": "https://ichef.bbci.co.uk/news/1024/cpsprodpb/146F9/production/_128650738_screenshot-11.png",
+    "comments": 0,
+    "location": "Mykolayiv Region, Ukraine",
+    "id": "i3"
+  },
+  {
+    "title": "Сніг",
+    "image": "https://static01.nyt.com/images/2023/03/23/multimedia/23up-snow-ny1-pqtv/23up-snow-ny1-pqtv-superJumbo.jpg",
+    "comments": 7,
+    "location": "Mykolayiv Region, Ukraine",
+    "id": "i4"
+  },
+  {
+    "title": "Гриби",
+    "image": "https://i.guim.co.uk/img/media/1cc07792071f10976ab59070d30c6a1bbdf934e8/0_612_4095_2459/master/4095.jpg?width=1200&quality=85&auto=format&fit=max&s=af6660acb378ce50f0c0349dab88a5c8",
+    "comments": 1,
+    "location": "Kherson Region, Ukraine",
+    "id": "i5"
+  }
+]
