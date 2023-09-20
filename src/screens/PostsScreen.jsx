@@ -22,6 +22,7 @@ const PostsScreen = () => {
                 location={item.location}
               />
             )}
+            showsVerticalScrollIndicator={false}
           ></FlatList>
         </>
       ) : (
@@ -39,6 +40,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     borderTopColor: "#b7b0b0",
     borderTopWidth: 1,
+    backgroundColor: "white",
   },
 });
 

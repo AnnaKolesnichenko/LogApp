@@ -64,7 +64,7 @@ const LoginScreen = ({ navigation }) => {
                 value={passwordText}
                 onChangeText={setPasswordText}
                 placeholder={"Пароль"}
-                keyboardType={"visible-password"}
+                keyboardType={"default"}
                 autoCapitalize={"none"}
               />
               <TouchableOpacity

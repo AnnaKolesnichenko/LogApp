@@ -88,7 +88,7 @@ const RegistrationScreen = ({ navigation }) => {
                   value={password}
                   onChangeText={setPassword}
                   placeholder={"Пароль"}
-                  keyboardType={"visible-password"}
+                  keyboardType={"default"}
                   autoCapitalize={"none"}
                 />
                 <TouchableOpacity

@@ -17,7 +17,7 @@ const BottomNavigation = () => {
     <BottomTabs.Navigator
       initialRouteName="Posts"
       screenOptions={({ navigation }) => ({
-        headerStyle: { backgroundColor: "transparent" },
+        headerStyle: { backgroundColor: "white" },
         tabBarActiveTintColor: "#FF6C00",
         tabBarInactiveTintColor: "black",
         tabBarStyle: {
@@ -66,16 +66,16 @@ const BottomNavigation = () => {
           tabBarStyle: {
             display: "none",
           },
-          headerRight: ({ color }) => {
+          headerLeft: ({ color }) => {
             return (
-              <View style={styles.logOut}>
+              <View style={styles.backwards}>
                 <Pressable
                   style={({ pressed }) => pressed && styles.pressedLogout}
                   onPress={() => {
-                    navigation.navigate("Login");
+                    navigation.navigate("Публікації");
                   }}
                 >
-                  <MaterialIcons name="logout" size={22} color="grey" />
+                  <AntDesign name="arrowleft" size={24} color="grey" />
                 </Pressable>
               </View>
             );
@@ -154,6 +154,9 @@ const styles = StyleSheet.create({
   logOut: {
     // marginTop: 35,
     marginRight: 35,
+  },
+  backwards: {
+    marginLeft: 25,
   },
   pressedLogout: {
     fill: "#FF6C00",

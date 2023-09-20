@@ -23,10 +23,6 @@ const ProfileStart = () => {
 };
 
 const styles = StyleSheet.create({
-  // container: {
-  //   flex: 1,
-  //   paddingTop: 15,
-  // },
   imageContainer: {
     flexDirection: "row",
     marginLeft: -140,

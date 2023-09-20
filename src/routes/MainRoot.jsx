@@ -20,6 +20,7 @@ const MainRootNavigation = () => {
             backgroundColor: "transparent",
             borderBottomColor: "grey",
             borderBottomWidth: 1,
+            justifyContent: "center",
           },
         })}
       >
