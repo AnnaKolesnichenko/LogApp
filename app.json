@@ -21,6 +21,10 @@
         "backgroundColor": "#ffffff"
       }
     },
+    "location": {
+      "always": "true",
+      "whenInUse": "true"
+    },
     "web": {
       "favicon": "./assets/favicon.png"
     }

@@ -1,4 +1,5 @@
 import "react-native-gesture-handler";
+
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { View, Pressable, StyleSheet } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
@@ -6,16 +7,16 @@ import { Octicons } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
 
-import PostsScreen from "../screens/PostsScreen";
 import CreatePostsScreen from "../screens/CreatePostsScreen";
 import ProfileScreen from "../screens/ProfileScreen";
+import PostsStack from "./PostsStack";
 
 const BottomTabs = createBottomTabNavigator();
 
 const BottomNavigation = () => {
   return (
     <BottomTabs.Navigator
-      initialRouteName="Posts"
+      initialRouteName="Публікації"
       screenOptions={({ navigation }) => ({
         headerStyle: { backgroundColor: "white" },
         tabBarActiveTintColor: "#FF6C00",
@@ -29,8 +30,9 @@ const BottomNavigation = () => {
     >
       <BottomTabs.Screen
         name="Публікації"
-        component={PostsScreen}
+        component={PostsStack}
         options={({ navigation }) => ({
+          headerTitle: "",
           headerRight: ({ color }) => {
             return (
               <View style={styles.logOut}>
@@ -59,6 +61,7 @@ const BottomNavigation = () => {
           ),
         })}
       />
+
       <BottomTabs.Screen
         name="Створити публікацію"
         component={CreatePostsScreen}

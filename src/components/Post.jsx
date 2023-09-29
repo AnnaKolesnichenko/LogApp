@@ -1,8 +1,19 @@
-import { View, Text, Image, StyleSheet } from "react-native";
+import { View, Text, Image, StyleSheet, Pressable } from "react-native";
 import { EvilIcons } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
+import LocationIdentifier from "./LocationIdentifier";
 
 const Post = ({ image, location, title, comments }) => {
-  console.log(comments);
+  const navigation = useNavigation();
+
+  const getCommentsHandler = () => {
+    navigation.navigate("Коментарі", { imageUri: image });
+  };
+
+  const getMapHandler = () => {
+    navigation.navigate("Мапа", { title: "Мапа" });
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.imageContent}>
@@ -11,15 +22,26 @@ const Post = ({ image, location, title, comments }) => {
       </View>
       <View style={styles.descriptionContainer}>
         <View style={styles.content}>
-          <EvilIcons name="comment" size={24} color="#b7b0b0" />
+          <EvilIcons
+            name="comment"
+            size={24}
+            color="#b7b0b0"
+            onPress={getCommentsHandler}
+          />
           <Text style={{ color: comments > 0 ? "black" : "#b7b0b0" }}>
             {comments}
           </Text>
         </View>
-        <View style={styles.content}>
-          <EvilIcons name="location" size={24} color="#b7b0b0" />
+        <Pressable style={styles.content}>
+          <EvilIcons
+            name="location"
+            size={24}
+            color="#b7b0b0"
+            onPress={getMapHandler}
+          />
+
           <Text style={styles.locationText}>{location}</Text>
-        </View>
+        </Pressable>
       </View>
     </View>
   );
