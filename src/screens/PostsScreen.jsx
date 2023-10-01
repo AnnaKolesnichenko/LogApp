@@ -20,6 +20,7 @@ const PostsScreen = () => {
                 image={item.image}
                 comments={item.comments}
                 location={item.location}
+                country={item.country}
               />
             )}
             showsVerticalScrollIndicator={false}

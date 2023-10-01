@@ -59,12 +59,14 @@ const CommentsScreen = ({ navigation, route }) => {
         style={styles.container}
       >
         <Image source={{ uri: imageUri }} style={styles.image} />
+
         <FlatList
           style={{ width: "100%", marginTop: 15 }}
           data={comments}
           keyExtractor={(item) => item}
           renderItem={renderItem}
         />
+
         <View style={styles.commentinput}>
           <TextInput
             placeholder="Add a comment..."
@@ -91,15 +93,24 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: "white",
   },
+  commentsContainer: {
+    flex: 1,
+    marginTop: 130,
+    alignItems: "center",
+    backgroundColor: "white",
+  },
   image: {
     width: 390,
     height: 250,
     borderRadius: 10,
+    marginTop: 120,
   },
   commentinput: {
     flexDirection: "row",
     justifyContent: "space-between",
-    width: "90%",
+    position: "absolute",
+    bottom: 20,
+    width: "80%",
     padding: 7,
     marginBottom: 15,
     alignItems: "center",
@@ -109,7 +120,7 @@ const styles = StyleSheet.create({
   icon: {
     padding: 5,
     backgroundColor: "orange",
-    borderRadius: "100%",
+    borderRadius: 100,
   },
   odd: {
     alignSelf: "flex-end",

@@ -10,6 +10,7 @@ import { Ionicons } from "@expo/vector-icons";
 import CreatePostsScreen from "../screens/CreatePostsScreen";
 import ProfileScreen from "../screens/ProfileScreen";
 import PostsStack from "./PostsStack";
+import PostsScreen from "../screens/PostsScreen";
 
 const BottomTabs = createBottomTabNavigator();
 
@@ -30,9 +31,8 @@ const BottomNavigation = () => {
     >
       <BottomTabs.Screen
         name="Публікації"
-        component={PostsStack}
+        component={PostsScreen}
         options={({ navigation }) => ({
-          headerTitle: "",
           headerRight: ({ color }) => {
             return (
               <View style={styles.logOut}>
@@ -101,6 +101,7 @@ const BottomNavigation = () => {
         name="Profile"
         component={ProfileScreen}
         options={({ navigation, route }) => ({
+          headerShown: false,
           headerRight: ({ color }) => {
             return (
               <View style={styles.logOut}>
@@ -129,6 +130,26 @@ const BottomNavigation = () => {
           ),
         })}
       />
+      {/* <BottomTabs.Screen
+        name="Коментарі"
+        component={CommentsScreen}
+        options={{
+          title: "Коментарі",
+          tabBarStyle: {
+            display: "none",
+          },
+        }}
+      />
+      <BottomTabs.Screen
+        name="Мапа"
+        component={MapScreen}
+        options={{
+          title: "Мапа",
+          tabBarStyle: {
+            display: "none",
+          },
+        }}
+      /> */}
     </BottomTabs.Navigator>
   );
 };

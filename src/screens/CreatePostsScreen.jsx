@@ -8,9 +8,9 @@ import {
   Button,
   Image,
 } from "react-native";
+import { useIsFocused } from "@react-navigation/native";
 import { TextInput } from "react-native-gesture-handler";
-import { FontAwesome } from "@expo/vector-icons";
-import { EvilIcons, Ionicons } from "@expo/vector-icons";
+import { EvilIcons, FontAwesome, Feather } from "@expo/vector-icons";
 
 import * as MediaLibrary from "expo-media-library";
 import { Camera } from "expo-camera";
@@ -26,6 +26,8 @@ const CreatePostsScreen = ({ navigation }) => {
   const [hasPermission, setHasPermission] = useState(null);
   const [cameraRef, setCameraRef] = useState(null);
 
+  const isFocused = useIsFocused();
+
   useEffect(() => {
     (async () => {
       const { status } = await Camera.requestCameraPermissionsAsync();
@@ -33,6 +35,25 @@ const CreatePostsScreen = ({ navigation }) => {
       await MediaLibrary.requestPermissionsAsync();
     })();
   }, []);
+
+  useEffect(() => {
+    if (isFocused) {
+      // const getInputData = async () => {
+      //   const postData = {
+      //     title,
+      //     location,
+      //     image,
+      //     locationDataInfo,
+      //   };
+      //   navigation.navigate("Публікації", { data: postData });
+      // };
+      setImage(null);
+      setTitle("");
+      setLocation("");
+      setLocationDataInfo(null);
+      // getInputData();
+    }
+  }, [isFocused]);
 
   if (hasPermission === null) {
     return <View />;
@@ -83,7 +104,6 @@ const CreatePostsScreen = ({ navigation }) => {
       image,
       locationDataInfo,
     };
-    //console.log(postData);
     navigation.navigate("Публікації", { data: postData });
   };
 
@@ -106,6 +126,12 @@ const CreatePostsScreen = ({ navigation }) => {
                 style={styles.flipContainer}
                 onPress={changeCameraType}
               >
+                <Pressable
+                  onPress={takePictureHandler}
+                  style={styles.makePhotoBtn}
+                >
+                  <Feather name="camera" size={24} color="black" />
+                </Pressable>
                 <Text
                   style={{ fontSize: 18, marginBottom: 10, color: "white" }}
                 >
@@ -116,11 +142,11 @@ const CreatePostsScreen = ({ navigation }) => {
             </View>
           </Camera>
         )}
-
-        <Button
-          onPress={takePictureHandler}
-          title={image ? "Редагувати фото" : "Завантажте фото"}
-        ></Button>
+        <View style={styles.changePhoto}>
+          <Text style={{ textAlign: "left", color: "#b7b0b0" }}>
+            {image ? "Редагувати фото" : "Завантажте фото"}
+          </Text>
+        </View>
       </View>
       <View>
         <TextInput
@@ -180,7 +206,7 @@ const CreatePostsScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 20,
+    padding: 5,
     backgroundColor: "white",
     // justifyContent: "center",
     // alignItems: "center",
@@ -188,6 +214,16 @@ const styles = StyleSheet.create({
   camera: {
     // flex: 1,
     height: 300,
+  },
+  makePhotoBtn: {
+    backgroundColor: "white",
+    padding: 15,
+    justifyContent: "center",
+    alignSelf: "center",
+    borderRadius: 50,
+    position: "absolute",
+    top: -125,
+    opacity: 0.3,
   },
   photoView: {
     flex: 1,
@@ -214,6 +250,11 @@ const styles = StyleSheet.create({
     color: "#b7b0b0",
     marginTop: 15,
     marginBottom: 30,
+  },
+  changePhoto: {
+    alignSelf: "flex-start",
+    marginTop: 10,
+    marginLeft: 5,
   },
   preview: {
     flex: 1,
@@ -265,7 +306,8 @@ const styles = StyleSheet.create({
   trash: {
     justifyContent: "center",
     alignItems: "center",
-    marginTop: 120,
+    marginTop: 110,
+    marginBottom: 20,
     padding: 10,
     width: 80,
     backgroundColor: "#f6f6f6",

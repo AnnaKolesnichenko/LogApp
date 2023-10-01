@@ -3,7 +3,7 @@ import { EvilIcons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { FontAwesome } from "@expo/vector-icons";
 
-const Post = ({ image, location, title, comments, country, likes }) => {
+const ProfilePost = ({ image, location, title, comments, country, likes }) => {
   const navigation = useNavigation();
 
   const getCommentsHandler = () => {
@@ -21,23 +21,33 @@ const Post = ({ image, location, title, comments, country, likes }) => {
         <Text style={styles.imageText}>{title}</Text>
       </View>
       <View style={styles.descriptionContainer}>
-        <View style={styles.content}>
-          <FontAwesome
-            name="comment"
-            size={20}
-            style={{ color: comments > 0 ? "#ff6c01" : "#b7b0b0" }}
-            onPress={getCommentsHandler}
-          />
+        <View style={{ flexDirection: "row", gap: 10 }}>
+          <View style={styles.content}>
+            <FontAwesome
+              name="comment"
+              size={20}
+              style={{ color: comments > 0 ? "#ff6c01" : "#b7b0b0" }}
+              onPress={getCommentsHandler}
+            />
 
-          <Text style={{ color: comments > 0 ? "#ff6c01" : "#b7b0b0" }}>
-            {comments}
-          </Text>
+            <Text style={{ color: comments > 0 ? "#ff6c01" : "#b7b0b0" }}>
+              {comments}
+            </Text>
+          </View>
+          <View style={styles.contentLike}>
+            <EvilIcons
+              name="like"
+              size={26}
+              style={{ color: likes > 0 ? "#ff6c01" : "#b7b0b0" }}
+            />
+            <Text>{likes}</Text>
+          </View>
         </View>
         <Pressable style={styles.content}>
           <EvilIcons name="location" size={24} color="#b7b0b0" />
 
           <Text onPress={getMapHandler} style={styles.locationText}>
-            {location}, {country}
+            {country}
           </Text>
         </Pressable>
       </View>
@@ -70,6 +80,13 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
+  contentLike: {
+    marginLeft: 10,
+    flexDirection: "row",
+    gap: 5,
+    alignItems: "center",
+    justifyContent: "center",
+  },
   locationText: {
     textDecorationColor: "grey",
     textDecorationLine: "underline",
@@ -77,4 +94,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Post;
+export default ProfilePost;

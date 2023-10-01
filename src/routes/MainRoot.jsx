@@ -6,6 +6,8 @@ import { StyleSheet } from "react-native";
 import LoginScreen from "../screens/LoginScreen";
 import RegistrationScreen from "../screens/RegistrationScreen";
 import BottomNavigation from "./BottomTabsRoot";
+import CommentsScreen from "../screens/CommentsScreen";
+import MapScreen from "../screens/MapScreen";
 const Stack = createStackNavigator();
 
 const MainRootNavigation = () => {
@@ -20,7 +22,6 @@ const MainRootNavigation = () => {
             backgroundColor: "transparent",
             borderBottomColor: "grey",
             borderBottomWidth: 1,
-            justifyContent: "center",
           },
         })}
       >
@@ -58,6 +59,16 @@ const MainRootNavigation = () => {
               backgroundColor: "transparent",
             },
           }}
+        />
+        <Stack.Screen
+          name="Коментарі"
+          component={CommentsScreen}
+          options={{ title: "Коментарі" }}
+        />
+        <Stack.Screen
+          name="Мапа"
+          component={MapScreen}
+          options={{ title: "Мапа" }}
         />
       </Stack.Navigator>
     </NavigationContainer>
