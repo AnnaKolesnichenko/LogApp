@@ -37,21 +37,11 @@ const CreatePostsScreen = ({ navigation }) => {
   }, []);
 
   useEffect(() => {
-    if (isFocused) {
-      // const getInputData = async () => {
-      //   const postData = {
-      //     title,
-      //     location,
-      //     image,
-      //     locationDataInfo,
-      //   };
-      //   navigation.navigate("Публікації", { data: postData });
-      // };
+    if (!isFocused) {
       setImage(null);
       setTitle("");
       setLocation("");
       setLocationDataInfo(null);
-      // getInputData();
     }
   }, [isFocused]);
 
