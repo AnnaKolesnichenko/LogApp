@@ -28,3 +28,18 @@
 // };
 
 // export default PostsStack;
+
+// import { NavigationContainer } from "@react-navigation/native";
+// import MainRootNavigation from "./MainRoot";
+// import BottomNavigation from "./BottomTabsRoot";
+
+// const Navigation = () => {
+//   return (
+//     <NavigationContainer>
+//       <MainRootNavigation />
+//       <BottomNavigation />
+//     </NavigationContainer>
+//   );
+// };
+
+// export default Navigation;

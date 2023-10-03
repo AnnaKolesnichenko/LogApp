@@ -10,19 +10,45 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
   TouchableOpacity,
+  Alert,
 } from "react-native";
 
 import backImage from "../images/pic.jpg";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AntDesign } from "@expo/vector-icons";
 
 import InputType from "../components/InputType";
+import { createUser } from "../data/fetchAuth";
+import Loader from "../components/Loader";
+import { useDispatch, useSelector } from "react-redux";
+import { authenticate, updateAsyncStorage } from "../../store/authReducer";
 
 const RegistrationScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [login, setLogin] = useState("");
   const [passVisible, setPassVisible] = useState(false);
+  const [isUserCreating, setIsUserCreating] = useState(false);
+
+  const tokenSelected = useSelector((state) => state.authenticate.token);
+  console.log(tokenSelected);
+  const dispatch = useDispatch();
+
+  const signUpHandler = async (email, password) => {
+    setIsUserCreating(true);
+    try {
+      const token = await createUser(email, password);
+      dispatch(updateAsyncStorage(token));
+      console.log(token);
+    } catch (error) {
+      Alert.alert(
+        "SignUp failed",
+        "Please check your input data and try again later"
+      );
+    }
+    console.log(email, password);
+    setIsUserCreating(false);
+  };
 
   const clearInputs = () => {
     setEmail("");
@@ -31,9 +57,16 @@ const RegistrationScreen = ({ navigation }) => {
   };
 
   const getInputData = () => {
-    console.log({ email, login, password });
-    clearInputs();
-    navigation.navigate("Home", {});
+    if (email.trim() === "" || password.trim() === "" || login.trim() === "") {
+      Alert.alert("Invalid input", "Please check your entered data");
+      setEmail("");
+      setLogin("");
+      setPassword("");
+      clearInputs();
+      return;
+    }
+    signUpHandler(email, password);
+    navigation.navigate("Home");
   };
 
   const pressHandler = () => {
@@ -47,6 +80,10 @@ const RegistrationScreen = ({ navigation }) => {
   const handleImagePicker = () => {
     console.log("image to be added...");
   };
+
+  if (isUserCreating) {
+    return <Loader massage="Creating a new user..." />;
+  }
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>

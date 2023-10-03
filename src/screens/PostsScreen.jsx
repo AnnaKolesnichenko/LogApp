@@ -1,18 +1,33 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 import Post from "../components/Post";
 import ProfileStart from "../components/ProfileStart";
-import dummy_data from "../data/dummy_data";
+//import dummy_data from "../data/dummy_data";
+import { getPostData } from "../data/fetchDB";
+import { useDispatch, useSelector } from "react-redux";
+import { addPost, setPosts } from "../../store/postsReducer";
 
 const PostsScreen = () => {
+  //const [data, setData] = useState([]);
+  const dispatch = useDispatch();
+  const dataSelect = useSelector((state) => state.posts.posts);
+
+  useEffect(() => {
+    const fetchPosts = async () => {
+      const posts = await getPostData();
+      dispatch(setPosts(posts));
+    };
+    fetchPosts();
+  }, []);
+
   return (
     <View style={styles.container}>
-      {dummy_data && dummy_data.length > 0 ? (
+      {dataSelect && dataSelect.length > 0 ? (
         <>
           <ProfileStart />
           <FlatList
-            data={dummy_data}
+            data={dataSelect}
             keyExtractor={(item) => item.id}
             renderItem={({ item }) => (
               <Post

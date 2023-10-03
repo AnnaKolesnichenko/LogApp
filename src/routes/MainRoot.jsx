@@ -8,73 +8,82 @@ import RegistrationScreen from "../screens/RegistrationScreen";
 import BottomNavigation from "./BottomTabsRoot";
 import CommentsScreen from "../screens/CommentsScreen";
 import MapScreen from "../screens/MapScreen";
+import { useState } from "react";
+import { useSelector } from "react-redux";
 const Stack = createStackNavigator();
 
 const MainRootNavigation = () => {
   return (
-    <NavigationContainer>
-      <Stack.Navigator
-        initialRouteName="Login"
-        screenOptions={({ navigation }) => ({
-          headerTransparent: true,
-          // title: "",
-          headerStyle: {
-            backgroundColor: "transparent",
-            borderBottomColor: "grey",
-            borderBottomWidth: 1,
-          },
-        })}
-      >
-        <Stack.Screen
-          name="Home"
-          component={BottomNavigation}
-          options={{
-            headerShown: false,
-          }}
-        />
-        <Stack.Screen
-          name="Registration"
-          component={RegistrationScreen}
-          options={{
-            headerShown: false,
-          }}
-          screenOptions={{
-            headerTransparent: true,
-            headerShown: false,
-            headerStyle: {
-              backgroundColor: "transparent",
-            },
-          }}
-        />
-        <Stack.Screen
-          name="Login"
-          component={LoginScreen}
-          options={{
-            headerShown: false,
-          }}
-          screenOptions={{
-            headerTransparent: true,
-            headerShown: false,
-            headerStyle: {
-              backgroundColor: "transparent",
-            },
-          }}
-        />
-        <Stack.Screen
-          name="Коментарі"
-          component={CommentsScreen}
-          options={{ title: "Коментарі" }}
-        />
-        <Stack.Screen
-          name="Мапа"
-          component={MapScreen}
-          options={{ title: "Мапа" }}
-        />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <Stack.Navigator
+      initialRouteName="Login"
+      screenOptions={({ navigation }) => ({
+        headerTransparent: true,
+        headerStyle: {
+          backgroundColor: "transparent",
+          borderBottomColor: "grey",
+          borderBottomWidth: 1,
+        },
+      })}
+    >
+      <Stack.Screen
+        name="Registration"
+        component={RegistrationScreen}
+        options={{
+          headerShown: false,
+        }}
+        screenOptions={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="Login"
+        component={LoginScreen}
+        options={{
+          headerShown: false,
+        }}
+        screenOptions={{
+          headerShown: false,
+        }}
+      />
+    </Stack.Navigator>
   );
 };
 
+const AuthenticatedStack = () => {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        name="Home"
+        component={BottomNavigation}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="Коментарі"
+        component={CommentsScreen}
+        options={{ title: "Коментарі" }}
+      />
+      <Stack.Screen
+        name="Мапа"
+        component={MapScreen}
+        options={{ title: "Мапа" }}
+      />
+    </Stack.Navigator>
+  );
+};
+
+const Navigation = () => {
+  const isAuthenticated = useSelector(
+    (state) => state.authenticate.isAuthenticated
+  );
+  return (
+    <NavigationContainer>
+      {isAuthenticated && <AuthenticatedStack />}
+      {!isAuthenticated && <MainRootNavigation />}
+    </NavigationContainer>
+  );
+};
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -104,5 +113,6 @@ const styles = StyleSheet.create({
     fill: "#FF6C00",
   },
 });
+export default Navigation;
 
-export default MainRootNavigation;
+// export default MainRootNavigation;

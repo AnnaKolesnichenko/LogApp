@@ -10,17 +10,41 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
   TouchableOpacity,
+  Alert,
 } from "react-native";
 
 import backImage from "../images/pic.jpg";
 import { useState } from "react";
 
 import InputType from "../components/InputType";
+import { signInUser } from "../data/fetchAuth";
+import Loader from "../components/Loader";
+import { useDispatch, useSelector } from "react-redux";
+import { authenticate } from "../../store/authReducer";
 
 const LoginScreen = ({ navigation }) => {
   const [emailText, setEmailText] = useState("");
   const [passwordText, setPasswordText] = useState("");
   const [passVisible, setPassVisible] = useState(false);
+  const [isUserLogging, setIsUserLogging] = useState(false);
+
+  const tokenSelected = useSelector((state) => state.authenticate.token);
+  const dispatch = useDispatch();
+  console.log(tokenSelected);
+
+  const signInHandler = async (email, password) => {
+    setIsUserLogging(true);
+    try {
+      const token = await signInUser(email, password);
+      dispatch(authenticate(token));
+    } catch (error) {
+      Alert.alert(
+        "Login failed...",
+        "Something went wrong, check your login or password and try again"
+      );
+    }
+    setIsUserLogging(false);
+  };
 
   const clearInputs = () => {
     setEmailText("");
@@ -32,7 +56,14 @@ const LoginScreen = ({ navigation }) => {
   };
 
   const getInputData = () => {
-    console.log({ emailText, passwordText });
+    if (emailText.trim() === "" || passwordText.trim() === "") {
+      Alert.alert("Invalid input", "Please check your entered data");
+      setEmailText("");
+      setPasswordText("");
+      clearInputs();
+      return;
+    }
+    signInHandler(emailText, passwordText);
     clearInputs();
     navigation.navigate("Home");
   };
@@ -40,6 +71,10 @@ const LoginScreen = ({ navigation }) => {
   const showPassword = () => {
     setPassVisible(!passVisible);
   };
+
+  if (isUserLogging) {
+    return <Loader message="User is being logged in..." />;
+  }
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>

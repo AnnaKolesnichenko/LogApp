@@ -11,10 +11,13 @@ import CreatePostsScreen from "../screens/CreatePostsScreen";
 import ProfileScreen from "../screens/ProfileScreen";
 import PostsStack from "./PostsStack";
 import PostsScreen from "../screens/PostsScreen";
+import { useDispatch } from "react-redux";
+import { logout } from "../../store/authReducer";
 
 const BottomTabs = createBottomTabNavigator();
 
 const BottomNavigation = () => {
+  const dispatch = useDispatch();
   return (
     <BottomTabs.Navigator
       initialRouteName="Публікації"
@@ -38,9 +41,7 @@ const BottomNavigation = () => {
               <View style={styles.logOut}>
                 <Pressable
                   style={({ pressed }) => pressed && styles.pressedLogout}
-                  onPress={() => {
-                    navigation.navigate("Login");
-                  }}
+                  onPress={() => dispatch(logout())}
                 >
                   <MaterialIcons name="logout" size={22} color="grey" />
                 </Pressable>

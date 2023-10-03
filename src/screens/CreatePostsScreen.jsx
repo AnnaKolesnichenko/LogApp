@@ -15,6 +15,9 @@ import { EvilIcons, FontAwesome, Feather } from "@expo/vector-icons";
 import * as MediaLibrary from "expo-media-library";
 import { Camera } from "expo-camera";
 import * as Location from "expo-location";
+import { sendPosts } from "../data/fetchDB";
+import { useDispatch } from "react-redux";
+import { addPost } from "../../store/postsReducer";
 
 const CreatePostsScreen = ({ navigation }) => {
   const [title, setTitle] = useState("");
@@ -27,6 +30,7 @@ const CreatePostsScreen = ({ navigation }) => {
   const [cameraRef, setCameraRef] = useState(null);
 
   const isFocused = useIsFocused();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     (async () => {
@@ -94,6 +98,8 @@ const CreatePostsScreen = ({ navigation }) => {
       image,
       locationDataInfo,
     };
+    dispatch(addPost(postData));
+    sendPosts(postData);
     navigation.navigate("Публікації", { data: postData });
   };
 
