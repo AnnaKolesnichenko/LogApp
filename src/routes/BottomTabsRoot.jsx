@@ -111,7 +111,7 @@ const BottomNavigation = () => {
                 <Pressable
                   style={({ pressed }) => pressed && styles.pressedLogout}
                   onPress={() => {
-                    navigation.navigate("Login");
+                    dispatch(logout());
                   }}
                 >
                   <MaterialIcons name="logout" size={22} color="grey" />
