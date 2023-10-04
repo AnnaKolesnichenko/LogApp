@@ -18,12 +18,15 @@ import * as Location from "expo-location";
 import { sendPosts } from "../data/fetchDB";
 import { useDispatch } from "react-redux";
 import { addPost } from "../../store/postsReducer";
+import Loader from "../components/Loader";
 
 const CreatePostsScreen = ({ navigation }) => {
   const [title, setTitle] = useState("");
   const [location, setLocation] = useState("");
   const [image, setImage] = useState(null);
   const [locationDataInfo, setLocationDataInfo] = useState(null);
+  const [photoLoading, setPhotoLoading] = useState(false);
+  const [photoTaken, setPhotoTaken] = useState(false);
 
   const [type, setType] = useState(Camera.Constants.Type.back);
   const [hasPermission, setHasPermission] = useState(null);
@@ -67,6 +70,8 @@ const CreatePostsScreen = ({ navigation }) => {
 
   const takePictureHandler = async () => {
     if (cameraRef) {
+      setPhotoLoading(true);
+      setPhotoTaken(true);
       try {
         const { uri } = await cameraRef.takePictureAsync();
         setImage(uri);
@@ -88,8 +93,14 @@ const CreatePostsScreen = ({ navigation }) => {
       } catch (error) {
         console.error("Error making the photo", error);
       }
+      setPhotoLoading(false);
+      setPhotoTaken(false);
     }
   };
+
+  if(photoLoading) {
+    return <Loader message="Wait...we aer making a photo."/>
+  }
 
   const getInputData = async () => {
     const postData = {
@@ -104,7 +115,7 @@ const CreatePostsScreen = ({ navigation }) => {
   };
 
   const deleteCreatedPost = () => {
-    navigation.navigate("Публікації");
+    // navigation.navigate("Публікації");
     setImage(null);
     setLocation("");
     setTitle("");
@@ -125,6 +136,7 @@ const CreatePostsScreen = ({ navigation }) => {
                 <Pressable
                   onPress={takePictureHandler}
                   style={styles.makePhotoBtn}
+                  disabled={photoTaken}
                 >
                   <Feather name="camera" size={24} color="black" />
                 </Pressable>

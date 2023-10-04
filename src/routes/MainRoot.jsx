@@ -18,6 +18,7 @@ const MainRootNavigation = () => {
       initialRouteName="Login"
       screenOptions={({ navigation }) => ({
         headerTransparent: true,
+        headerTitleAlign: "center",
         headerStyle: {
           backgroundColor: "transparent",
           borderBottomColor: "grey",
@@ -31,17 +32,11 @@ const MainRootNavigation = () => {
         options={{
           headerShown: false,
         }}
-        screenOptions={{
-          headerShown: false,
-        }}
       />
       <Stack.Screen
         name="Login"
         component={LoginScreen}
         options={{
-          headerShown: false,
-        }}
-        screenOptions={{
           headerShown: false,
         }}
       />

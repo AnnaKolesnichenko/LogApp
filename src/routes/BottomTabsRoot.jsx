@@ -25,6 +25,7 @@ const BottomNavigation = () => {
         headerStyle: { backgroundColor: "white" },
         tabBarActiveTintColor: "#FF6C00",
         tabBarInactiveTintColor: "black",
+        headerTitleAlign: 'center',
         tabBarStyle: {
           backgroundColor: "white",
           paddingTop: 10,
