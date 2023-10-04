@@ -25,7 +25,7 @@ const BottomNavigation = () => {
         headerStyle: { backgroundColor: "white" },
         tabBarActiveTintColor: "#FF6C00",
         tabBarInactiveTintColor: "black",
-        headerTitleAlign: 'center',
+        headerTitleAlign: "center",
         tabBarStyle: {
           backgroundColor: "white",
           paddingTop: 10,
@@ -78,6 +78,7 @@ const BottomNavigation = () => {
                   style={({ pressed }) => pressed && styles.pressedLogout}
                   onPress={() => {
                     navigation.navigate("Публікації");
+                    navigation.pop();
                   }}
                 >
                   <AntDesign name="arrowleft" size={24} color="grey" />

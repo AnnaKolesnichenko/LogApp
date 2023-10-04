@@ -23,7 +23,7 @@ import Loader from "../components/Loader";
 import { useDispatch, useSelector } from "react-redux";
 import { authenticate, updateAsyncStorage } from "../../store/authReducer";
 
-const RegistrationScreen = ({navigation}) => {
+const RegistrationScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [login, setLogin] = useState("");
@@ -38,7 +38,7 @@ const RegistrationScreen = ({navigation}) => {
     setIsUserCreating(true);
     try {
       const token = await createUser(email, password);
-      dispatch(updateAsyncStorage(token));
+      dispatch(authenticate(token));
       console.log(token);
     } catch (error) {
       Alert.alert(

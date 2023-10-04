@@ -16,22 +16,10 @@ const authSlice = createSlice({
     logout: (state, action) => {
       state.token = "";
       state.isAuthenticated = false;
+      AsyncStorage.removeItem("token", (state.token = ""));
     },
   },
 });
-
-export const updateAsyncStorage = (token) => {
-  const asyncStored = async (dispatch) => {
-    try {
-      dispatch(authenticate(token));
-
-      await AsyncStorage.setItem("token", token);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-  return asyncStored;
-};
 
 export const { authenticate, logout } = authSlice.actions;
 export const authReducer = authSlice.reducer;
