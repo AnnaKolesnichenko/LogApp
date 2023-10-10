@@ -91,8 +91,9 @@ const Navigation = () => {
   );
   return (
     <NavigationContainer>
-      {isAuthenticated && <BottomNavigation />}
-      {!isAuthenticated && <MainRootNavigation />}
+      {isAuthenticated ? <BottomNavigation /> : <MainRootNavigation />}
+      {/* {isAuthenticated && <BottomNavigation />}
+      {!isAuthenticated && <MainRootNavigation />} */}
     </NavigationContainer>
   );
 };

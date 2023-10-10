@@ -6,13 +6,16 @@ import "react-native-gesture-handler";
 import { Provider } from "react-redux";
 import store from "./store/store";
 import Navigation from "./src/routes/MainRoot";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 export default function App() {
   return (
     <>
       <StatusBar style="dark" />
       <Provider store={store}>
-        <Navigation />
+        <GestureHandlerRootView style={{ flex: 1 }}>
+          <Navigation />
+        </GestureHandlerRootView>
       </Provider>
     </>
   );
