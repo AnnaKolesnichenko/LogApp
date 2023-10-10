@@ -79,6 +79,7 @@ const Navigation = () => {
     </NavigationContainer>
   );
 };
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
