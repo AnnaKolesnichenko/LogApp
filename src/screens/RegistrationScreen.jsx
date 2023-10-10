@@ -31,15 +31,18 @@ const RegistrationScreen = ({ navigation }) => {
   const [isUserCreating, setIsUserCreating] = useState(false);
 
   const tokenSelected = useSelector((state) => state.authenticate.token);
-  console.log(tokenSelected);
+  const user = useSelector((state) => state.authenticate.user);
+  console.log(user);
+  // console.log(tokenSelected);
   const dispatch = useDispatch();
 
   const signUpHandler = async (email, password) => {
     setIsUserCreating(true);
     try {
       const token = await createUser(email, password);
+      dispatch(authenticate.user([email, password]));
       dispatch(authenticate(token));
-      console.log(token);
+      // console.log(token);
     } catch (error) {
       Alert.alert(
         "SignUp failed",
