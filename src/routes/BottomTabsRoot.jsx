@@ -9,6 +9,8 @@ import { Ionicons } from "@expo/vector-icons";
 
 import CreatePostsScreen from "../screens/CreatePostsScreen";
 import ProfileScreen from "../screens/ProfileScreen";
+import CommentsScreen from "../screens/CommentsScreen";
+import MapScreen from "../screens/MapScreen";
 import PostsStack from "./PostsStack";
 import PostsScreen from "../screens/PostsScreen";
 import { useDispatch } from "react-redux";
@@ -133,7 +135,7 @@ const BottomNavigation = () => {
           ),
         })}
       />
-      {/* <BottomTabs.Screen
+      <BottomTabs.Screen
         name="Коментарі"
         component={CommentsScreen}
         options={{
@@ -152,7 +154,7 @@ const BottomNavigation = () => {
             display: "none",
           },
         }}
-      /> */}
+      />
     </BottomTabs.Navigator>
   );
 };

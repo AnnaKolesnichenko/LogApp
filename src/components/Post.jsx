@@ -11,7 +11,7 @@ const Post = ({ image, location, title, comments, country, likes }) => {
   };
 
   const getMapHandler = () => {
-    navigation.navigate("Мапа", { title: "Мапа" });
+    navigation.navigate("MapScreen", { title: "Мапа" });
   };
 
   return (

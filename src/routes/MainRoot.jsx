@@ -40,23 +40,6 @@ const MainRootNavigation = () => {
           headerShown: false,
         }}
       />
-      <Stack.Screen
-        name="Коментарі"
-        component={CommentsScreen}
-        options={{ title: "Коментарі" }}
-      />
-      <Stack.Screen
-        name="Мапа"
-        component={MapScreen}
-        options={{ title: "Мапа" }}
-      />
-      <Stack.Screen
-        name="Home"
-        component={BottomNavigation}
-        options={{
-          headerShown: false,
-        }}
-      />
     </Stack.Navigator>
   );
 };
@@ -92,8 +75,6 @@ const Navigation = () => {
   return (
     <NavigationContainer>
       {isAuthenticated ? <BottomNavigation /> : <MainRootNavigation />}
-      {/* {isAuthenticated && <BottomNavigation />}
-      {!isAuthenticated && <MainRootNavigation />} */}
     </NavigationContainer>
   );
 };
