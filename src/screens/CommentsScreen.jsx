@@ -18,7 +18,6 @@ const CommentsScreen = ({ navigation, route }) => {
   const [comments, setComments] = useState([]);
 
   const commentsHandler = () => {
-    console.log(inputVal);
     setComments((prevState) => [...prevState, inputVal]);
     setInputVal("");
   };
