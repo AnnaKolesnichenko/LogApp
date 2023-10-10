@@ -40,20 +40,6 @@ const MainRootNavigation = () => {
           headerShown: false,
         }}
       />
-    </Stack.Navigator>
-  );
-};
-
-const AuthenticatedStack = () => {
-  return (
-    <Stack.Navigator>
-      <Stack.Screen
-        name="Home"
-        component={BottomNavigation}
-        options={{
-          headerShown: false,
-        }}
-      />
       <Stack.Screen
         name="Коментарі"
         component={CommentsScreen}
@@ -64,9 +50,40 @@ const AuthenticatedStack = () => {
         component={MapScreen}
         options={{ title: "Мапа" }}
       />
+      <Stack.Screen
+        name="Home"
+        component={BottomNavigation}
+        options={{
+          headerShown: false,
+        }}
+      />
     </Stack.Navigator>
   );
 };
+
+// const AuthenticatedStack = () => {
+//   return (
+//     <Stack.Navigator>
+//       <Stack.Screen
+//         name="Home"
+//         component={BottomNavigation}
+//         options={{
+//           headerShown: false,
+//         }}
+//       />
+//       <Stack.Screen
+//         name="Коментарі"
+//         component={CommentsScreen}
+//         options={{ title: "Коментарі" }}
+//       />
+//       <Stack.Screen
+//         name="Мапа"
+//         component={MapScreen}
+//         options={{ title: "Мапа" }}
+//       />
+//     </Stack.Navigator>
+//   );
+// };
 
 const Navigation = () => {
   const isAuthenticated = useSelector(
@@ -74,7 +91,7 @@ const Navigation = () => {
   );
   return (
     <NavigationContainer>
-      {isAuthenticated && <AuthenticatedStack />}
+      {isAuthenticated && <BottomNavigation />}
       {!isAuthenticated && <MainRootNavigation />}
     </NavigationContainer>
   );

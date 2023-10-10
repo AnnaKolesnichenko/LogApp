@@ -20,7 +20,7 @@ const BottomNavigation = () => {
   const dispatch = useDispatch();
   return (
     <BottomTabs.Navigator
-      initialRouteName="Публікації"
+      // initialRouteName="Публікації"
       screenOptions={({ navigation }) => ({
         headerStyle: { backgroundColor: "white" },
         tabBarActiveTintColor: "#FF6C00",

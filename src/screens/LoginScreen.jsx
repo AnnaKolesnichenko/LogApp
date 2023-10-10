@@ -65,7 +65,7 @@ const LoginScreen = ({ navigation }) => {
     }
     signInHandler(emailText, passwordText);
     clearInputs();
-    navigation.navigate("Home");
+    navigation.navigate("Home", {});
   };
 
   const showPassword = () => {
