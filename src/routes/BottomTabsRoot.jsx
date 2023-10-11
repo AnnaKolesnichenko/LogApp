@@ -15,8 +15,10 @@ import PostsStack from "./PostsStack";
 import PostsScreen from "../screens/PostsScreen";
 import { useDispatch } from "react-redux";
 import { logout } from "../../store/authReducer";
+import { createStackNavigator } from "@react-navigation/stack";
 
 const BottomTabs = createBottomTabNavigator();
+const Stack = createStackNavigator();
 
 const BottomNavigation = () => {
   const dispatch = useDispatch();
@@ -31,6 +33,8 @@ const BottomNavigation = () => {
         tabBarStyle: {
           backgroundColor: "white",
           paddingTop: 10,
+          tabBarItemStyle: { flex: 1 },
+          marginLeft: 100,
         },
         tabBarLabel: "",
       })}
@@ -73,6 +77,7 @@ const BottomNavigation = () => {
           tabBarStyle: {
             display: "none",
           },
+
           headerLeft: ({ color }) => {
             return (
               <View style={styles.backwards}>
@@ -80,7 +85,7 @@ const BottomNavigation = () => {
                   style={({ pressed }) => pressed && styles.pressedLogout}
                   onPress={() => {
                     navigation.navigate("Публікації");
-                    navigation.pop();
+                    //navigation.pop();
                   }}
                 >
                   <AntDesign name="arrowleft" size={24} color="grey" />
@@ -135,25 +140,55 @@ const BottomNavigation = () => {
           ),
         })}
       />
-      <BottomTabs.Screen
+      <Stack.Screen
         name="Коментарі"
         component={CommentsScreen}
-        options={{
+        options={({ navigation }) => ({
           title: "Коментарі",
+          tabBarIconStyle: { display: "none" },
           tabBarStyle: {
             display: "none",
           },
-        }}
+          headerLeft: ({ color }) => {
+            return (
+              <View style={styles.backwards}>
+                <Pressable
+                  style={({ pressed }) => pressed && styles.pressedLogout}
+                  onPress={() => {
+                    navigation.navigate("Публікації");
+                  }}
+                >
+                  <AntDesign name="arrowleft" size={24} color="grey" />
+                </Pressable>
+              </View>
+            );
+          },
+        })}
       />
-      <BottomTabs.Screen
+      <Stack.Screen
         name="Мапа"
         component={MapScreen}
-        options={{
+        options={({ navigation }) => ({
           title: "Мапа",
+          tabBarIcon: () => <></>,
           tabBarStyle: {
             display: "none",
           },
-        }}
+          headerLeft: ({ color }) => {
+            return (
+              <View style={styles.backwards}>
+                <Pressable
+                  style={({ pressed }) => pressed && styles.pressedLogout}
+                  onPress={() => {
+                    navigation.navigate("Публікації");
+                  }}
+                >
+                  <AntDesign name="arrowleft" size={24} color="grey" />
+                </Pressable>
+              </View>
+            );
+          },
+        })}
       />
     </BottomTabs.Navigator>
   );

@@ -2,16 +2,32 @@ import { View, Text, Image, StyleSheet, Pressable } from "react-native";
 import { EvilIcons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { FontAwesome } from "@expo/vector-icons";
+import { getMapPreview } from "../data/location";
 
-const Post = ({ image, location, title, comments, country, likes }) => {
+const Post = ({
+  id,
+  image,
+  location,
+  title,
+  comments,
+  country,
+  likes,
+  locationDataInfo,
+}) => {
   const navigation = useNavigation();
+  const locationParts = locationDataInfo ? locationDataInfo.split(", ") : [];
+  const [lat, lng] = locationParts;
 
   const getCommentsHandler = () => {
-    navigation.navigate("Коментарі", { imageUri: image });
+    navigation.navigate("Коментарі", { imageUri: image, id: id });
   };
 
   const getMapHandler = () => {
-    navigation.navigate("MapScreen", { title: "Мапа" });
+    navigation.navigate("Мапа", {
+      title: "Мапа",
+      latitude: lat,
+      longitude: lng,
+    });
   };
 
   return (
@@ -37,7 +53,8 @@ const Post = ({ image, location, title, comments, country, likes }) => {
           <EvilIcons name="location" size={24} color="#b7b0b0" />
 
           <Text onPress={getMapHandler} style={styles.locationText}>
-            {location}, {country}
+            {location}
+            {""} {country}
           </Text>
         </Pressable>
       </View>
@@ -47,13 +64,13 @@ const Post = ({ image, location, title, comments, country, likes }) => {
 
 const styles = StyleSheet.create({
   container: {
-    padding: 10,
+    padding: 5,
     flex: 1,
     marginTop: 20,
   },
   image: {
-    width: 360,
-    height: 250,
+    width: 390,
+    height: 270,
     borderRadius: 10,
   },
   imageText: {

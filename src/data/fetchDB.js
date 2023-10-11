@@ -19,6 +19,7 @@ export const getPostData = async () => {
       comments: res.data[item].comments,
       country: res.data[item].country,
       likes: res.data[item].likes,
+      locationDataInfo: res.data[item].locationDataInfo,
     };
     posts.push(postItem);
   }

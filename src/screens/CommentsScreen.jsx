@@ -11,14 +11,20 @@ import {
 } from "react-native";
 import { FlatList, TextInput } from "react-native-gesture-handler";
 import { Ionicons } from "@expo/vector-icons";
+import { useDispatch, useSelector } from "react-redux";
+import { addCommentToPost } from "../../store/postsReducer";
 
 const CommentsScreen = ({ navigation, route }) => {
-  const { imageUri } = route.params;
+  const { imageUri, id } = route.params;
+
   const [inputVal, setInputVal] = useState("");
   const [comments, setComments] = useState([]);
 
+  const dispatch = useDispatch();
+
   const commentsHandler = () => {
     setComments((prevState) => [...prevState, inputVal]);
+    dispatch(addCommentToPost(id, comments));
     setInputVal("");
   };
 

@@ -12,6 +12,7 @@ const PostsScreen = () => {
   //const [data, setData] = useState([]);
   const dispatch = useDispatch();
   const dataSelect = useSelector((state) => state.posts.posts);
+  console.log(dataSelect);
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -28,14 +29,16 @@ const PostsScreen = () => {
           <ProfileStart />
           <FlatList
             data={dataSelect}
-            keyExtractor={(item) => item.id}
+            keyExtractor={(item, index) => index.toString()}
             renderItem={({ item }) => (
               <Post
+                id={item.id}
                 title={item.title}
                 image={item.image}
                 comments={item.comments}
                 location={item.location}
                 country={item.country}
+                locationDataInfo={item.locationDataInfo}
               />
             )}
             showsVerticalScrollIndicator={false}

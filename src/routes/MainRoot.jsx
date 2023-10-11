@@ -40,6 +40,13 @@ const MainRootNavigation = () => {
           headerShown: false,
         }}
       />
+      <Stack.Screen
+        name="Home"
+        component={BottomNavigation}
+        options={{
+          headerShown: false,
+        }}
+      />
     </Stack.Navigator>
   );
 };

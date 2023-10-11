@@ -25,8 +25,8 @@ const CreatePostsScreen = ({ navigation }) => {
   const [location, setLocation] = useState("");
   const [image, setImage] = useState(null);
   const [locationDataInfo, setLocationDataInfo] = useState(null);
-  const [photoLoading, setPhotoLoading] = useState(false);
-  const [photoTaken, setPhotoTaken] = useState(false);
+  // const [photoLoading, setPhotoLoading] = useState(false);
+  // const [photoTaken, setPhotoTaken] = useState(false);
 
   const [type, setType] = useState(Camera.Constants.Type.back);
   const [hasPermission, setHasPermission] = useState(null);
@@ -68,50 +68,69 @@ const CreatePostsScreen = ({ navigation }) => {
     );
   };
 
+  const getLocationData = async () => {
+    try {
+      const { status } = await Location.requestForegroundPermissionsAsync();
+      if (status !== "granted") {
+        console.error("No location permissions given");
+        return;
+      }
+
+      const currentLocation = await Location.getCurrentPositionAsync({});
+      const currentLocationData = {
+        lat: currentLocation.coords.latitude,
+        lng: currentLocation.coords.longitude,
+      };
+      const data = `${currentLocationData.lat}, ${currentLocationData.lng}`;
+      return data;
+    } catch (error) {
+      console.error("Error getting location", error);
+      return;
+    }
+  };
+
   const takePictureHandler = async () => {
     if (cameraRef) {
-      setPhotoLoading(true);
-      setPhotoTaken(true);
+      // setPhotoLoading(true);
+      // setPhotoTaken(false);
       try {
         const { uri } = await cameraRef.takePictureAsync();
         setImage(uri);
 
-        const { status } = await Location.requestForegroundPermissionsAsync();
-        if (status !== "granted") {
-          console.error("No location permissions given");
-          return;
+        const locationData = await getLocationData();
+        if (locationData) {
+          setLocationDataInfo(locationData);
         }
-
-        const currentLocation = await Location.getCurrentPositionAsync({});
-        const currentLocationData = {
-          lat: currentLocation.coords.latitude,
-          lng: currentLocation.coords.longitude,
-        };
-        const data = `${currentLocationData.lat}, ${currentLocationData.lng}`;
-        setLocationDataInfo(data);
         await MediaLibrary.createAssetAsync(uri);
       } catch (error) {
         console.error("Error making the photo", error);
       }
-      setPhotoLoading(false);
-      setPhotoTaken(false);
+      // setPhotoLoading(false);
+      // setPhotoTaken(false);
     }
   };
 
-  if(photoLoading) {
-    return <Loader message="Wait...we aer making a photo."/>
-  }
+  // if (photoLoading) {
+  //   return <Loader message="Wait...we are making a photo." />;
+  // }
 
   const getInputData = async () => {
-    const postData = {
-      title,
-      location,
-      image,
-      locationDataInfo,
-    };
-    dispatch(addPost(postData));
-    sendPosts(postData);
-    navigation.navigate("Публікації", { data: postData });
+    try {
+      const locationData = await getLocationData();
+      if (locationData) {
+        const postData = {
+          title,
+          location,
+          image,
+          locationDataInfo: locationData,
+        };
+        dispatch(addPost(postData));
+        sendPosts(postData);
+        navigation.navigate("Публікації", { data: postData });
+      }
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const deleteCreatedPost = () => {
@@ -136,7 +155,7 @@ const CreatePostsScreen = ({ navigation }) => {
                 <Pressable
                   onPress={takePictureHandler}
                   style={styles.makePhotoBtn}
-                  disabled={photoTaken}
+                  //disabled={photoTaken}
                 >
                   <Feather name="camera" size={24} color="black" />
                 </Pressable>
