@@ -6,6 +6,7 @@ import React, {
 } from "react";
 import { Alert, StyleSheet } from "react-native";
 import MapView, { Marker } from "react-native-maps";
+import { getAddress } from "../data/location";
 // import IconButton from "../UI/IconButton";
 
 const MapScreen = ({ navigation, route }) => {
@@ -14,17 +15,31 @@ const MapScreen = ({ navigation, route }) => {
 
   const { latitude, longitude } = route.params;
 
-  useEffect(() => {
-    setLocationLat(latitude);
-    setLocationLng(longitude);
-  }, [latitude, longitude]);
+  // useEffect(() => {
+  //   setLocationLat(Number(latitude));
+  //   setLocationLng(Number(longitude));
+  // }, [latitude, longitude]);
+  // console.log(locationLat, locationLng);
+
+  // useEffect(() => {
+  //   const fetchAddress = async () => {
+  //     try {
+  //       const where = await getAddress(locationLat, locationLng);
+  //       console.log(where);
+  //     } catch (error) {
+  //       console.error(error);
+  //     }
+  //   };
+  //   fetchAddress();
+  // }, [locationLat, locationLng]);
 
   const region = {
-    latitude: locationLat,
-    longitude: locationLng,
-    latitudeDelta: 0.0001,
-    longitudeDelta: 0.0001,
+    latitude: latitude,
+    longitude: longitude,
+    latitudeDelta: 0.002,
+    longitudeDelta: 0.002,
   };
+  console.log(region);
 
   // const saveLocation = useCallback(() => {
   //   if (!locationLat && !locationLng) {
@@ -52,10 +67,10 @@ const MapScreen = ({ navigation, route }) => {
 
   return (
     <MapView initialRegion={region} style={styles.map}>
-      {locationLat !== null && locationLng !== null && (
+      {latitude && longitude && (
         <Marker
           title="Picked Location"
-          coordinate={{ latitude: locationLat, longitude: locationLng }}
+          coordinate={{ latitude: latitude, longitude: longitude }}
         />
       )}
     </MapView>

@@ -10,8 +10,9 @@ import {
 } from "react-native";
 import { useIsFocused } from "@react-navigation/native";
 import { TextInput } from "react-native-gesture-handler";
-import { EvilIcons, FontAwesome, Feather } from "@expo/vector-icons";
+import { EvilIcons, FontAwesome, Feather, AntDesign } from "@expo/vector-icons";
 
+import { StackActions } from "@react-navigation/native";
 import * as MediaLibrary from "expo-media-library";
 import { Camera } from "expo-camera";
 import * as Location from "expo-location";
@@ -25,8 +26,8 @@ const CreatePostsScreen = ({ navigation }) => {
   const [location, setLocation] = useState("");
   const [image, setImage] = useState(null);
   const [locationDataInfo, setLocationDataInfo] = useState(null);
-  // const [photoLoading, setPhotoLoading] = useState(false);
-  // const [photoTaken, setPhotoTaken] = useState(false);
+  const [photoLoading, setPhotoLoading] = useState(false);
+  const [photoTaken, setPhotoTaken] = useState(false);
 
   const [type, setType] = useState(Camera.Constants.Type.back);
   const [hasPermission, setHasPermission] = useState(null);
@@ -34,6 +35,8 @@ const CreatePostsScreen = ({ navigation }) => {
 
   const isFocused = useIsFocused();
   const dispatch = useDispatch();
+
+  const popAction = StackActions.pop(1);
 
   useEffect(() => {
     (async () => {
@@ -91,8 +94,8 @@ const CreatePostsScreen = ({ navigation }) => {
 
   const takePictureHandler = async () => {
     if (cameraRef) {
-      // setPhotoLoading(true);
-      // setPhotoTaken(false);
+      setPhotoLoading(true);
+      setPhotoTaken(true);
       try {
         const { uri } = await cameraRef.takePictureAsync();
         setImage(uri);
@@ -105,14 +108,14 @@ const CreatePostsScreen = ({ navigation }) => {
       } catch (error) {
         console.error("Error making the photo", error);
       }
-      // setPhotoLoading(false);
+      setPhotoLoading(false);
       // setPhotoTaken(false);
     }
   };
 
-  // if (photoLoading) {
-  //   return <Loader message="Wait...we are making a photo." />;
-  // }
+  if (photoLoading) {
+    return <Loader message="Wait...we are making a photo." />;
+  }
 
   const getInputData = async () => {
     try {
@@ -142,6 +145,18 @@ const CreatePostsScreen = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
+      <View style={styles.backwards}>
+        <Pressable
+          style={({ pressed }) => pressed && styles.pressedLogout}
+          onPress={() => {
+            navigation.navigate("Публікації");
+            navigation.dispatch(StackActions.popToTop());
+            // navigation.pop();
+          }}
+        >
+          <AntDesign name="arrowleft" size={24} color="grey" />
+        </Pressable>
+      </View>
       <View style={styles.preview}>
         {image ? (
           <Image style={styles.image} source={{ uri: image }} />
@@ -155,7 +170,7 @@ const CreatePostsScreen = ({ navigation }) => {
                 <Pressable
                   onPress={takePictureHandler}
                   style={styles.makePhotoBtn}
-                  //disabled={photoTaken}
+                  disabled={photoTaken}
                 >
                   <Feather name="camera" size={24} color="black" />
                 </Pressable>

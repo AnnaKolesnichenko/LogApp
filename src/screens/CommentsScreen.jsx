@@ -19,6 +19,7 @@ const CommentsScreen = ({ navigation, route }) => {
 
   const [inputVal, setInputVal] = useState("");
   const [comments, setComments] = useState([]);
+  const [inputFocused, setInputFocused] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -26,6 +27,10 @@ const CommentsScreen = ({ navigation, route }) => {
     setComments((prevState) => [...prevState, inputVal]);
     dispatch(addCommentToPost(id, comments));
     setInputVal("");
+  };
+
+  const handleInputFocus = () => {
+    setInputFocused(true);
   };
 
   const renderItem = ({ item, index }) => {
@@ -76,6 +81,7 @@ const CommentsScreen = ({ navigation, route }) => {
           <TextInput
             placeholder="Add a comment..."
             onChangeText={setInputVal}
+            onFocus={handleInputFocus}
             value={inputVal}
           />
           <View style={styles.icon}>
