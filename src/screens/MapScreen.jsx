@@ -10,8 +10,8 @@ import { getAddress } from "../data/location";
 // import IconButton from "../UI/IconButton";
 
 const MapScreen = ({ navigation, route }) => {
-  const [locationLat, setLocationLat] = useState();
-  const [locationLng, setLocationLng] = useState();
+  // const [locationLat, setLocationLat] = useState();
+  // const [locationLng, setLocationLng] = useState();
 
   const { latitude, longitude } = route.params;
 
@@ -34,8 +34,8 @@ const MapScreen = ({ navigation, route }) => {
   // }, [locationLat, locationLng]);
 
   const region = {
-    latitude: latitude,
-    longitude: longitude,
+    latitude: Number(latitude),
+    longitude: Number(longitude),
     latitudeDelta: 0.002,
     longitudeDelta: 0.002,
   };

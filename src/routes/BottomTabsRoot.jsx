@@ -77,22 +77,22 @@ const BottomNavigation = () => {
           tabBarStyle: {
             display: "none",
           },
-
-          // headerLeft: ({ color }) => {
-          //   return (
-          //     <View style={styles.backwards}>
-          //       <Pressable
-          //         style={({ pressed }) => pressed && styles.pressedLogout}
-          //         onPress={() => {
-          //           navigation.navigate("Публікації");
-          //           // navigation.pop();
-          //         }}
-          //       >
-          //         <AntDesign name="arrowleft" size={24} color="grey" />
-          //       </Pressable>
-          //     </View>
-          //   );
-          // },
+          unmountOnBlur: true,
+          headerLeft: ({ color }) => {
+            return (
+              <View style={styles.backwards}>
+                <Pressable
+                  style={({ pressed }) => pressed && styles.pressedLogout}
+                  onPress={() => {
+                    navigation.navigate("Публікації");
+                    // navigation.pop();
+                  }}
+                >
+                  <AntDesign name="arrowleft" size={24} color="grey" />
+                </Pressable>
+              </View>
+            );
+          },
           tabBarIcon: ({ color, size }) => (
             <View style={styles.tabIcon}>
               <Pressable

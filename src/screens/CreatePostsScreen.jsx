@@ -12,7 +12,6 @@ import { useIsFocused } from "@react-navigation/native";
 import { TextInput } from "react-native-gesture-handler";
 import { EvilIcons, FontAwesome, Feather, AntDesign } from "@expo/vector-icons";
 
-import { StackActions } from "@react-navigation/native";
 import * as MediaLibrary from "expo-media-library";
 import { Camera } from "expo-camera";
 import * as Location from "expo-location";
@@ -35,8 +34,6 @@ const CreatePostsScreen = ({ navigation }) => {
 
   const isFocused = useIsFocused();
   const dispatch = useDispatch();
-
-  const popAction = StackActions.pop(1);
 
   useEffect(() => {
     (async () => {
@@ -145,18 +142,6 @@ const CreatePostsScreen = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.backwards}>
-        <Pressable
-          style={({ pressed }) => pressed && styles.pressedLogout}
-          onPress={() => {
-            navigation.navigate("Публікації");
-            navigation.dispatch(StackActions.popToTop());
-            // navigation.pop();
-          }}
-        >
-          <AntDesign name="arrowleft" size={24} color="grey" />
-        </Pressable>
-      </View>
       <View style={styles.preview}>
         {image ? (
           <Image style={styles.image} source={{ uri: image }} />
