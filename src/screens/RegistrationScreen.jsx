@@ -32,7 +32,7 @@ const RegistrationScreen = ({ navigation }) => {
 
   const tokenSelected = useSelector((state) => state.authenticate.token);
   const user = useSelector((state) => state.authenticate.user);
-  console.log(user);
+  //console.log(user);
   // console.log(tokenSelected);
   const dispatch = useDispatch();
 

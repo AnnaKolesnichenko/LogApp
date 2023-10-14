@@ -92,7 +92,7 @@ const CreatePostsScreen = ({ navigation }) => {
   const takePictureHandler = async () => {
     if (cameraRef) {
       setPhotoLoading(true);
-      setPhotoTaken(true);
+      // setPhotoTaken(true);
       try {
         const { uri } = await cameraRef.takePictureAsync();
         setImage(uri);
@@ -106,35 +106,39 @@ const CreatePostsScreen = ({ navigation }) => {
         console.error("Error making the photo", error);
       }
       setPhotoLoading(false);
-      // setPhotoTaken(false);
+      //setPhotoTaken(false);
     }
   };
 
-  if (photoLoading) {
-    return <Loader message="Wait...we are making a photo." />;
-  }
-
   const getInputData = async () => {
-    try {
-      const locationData = await getLocationData();
-      if (locationData) {
-        const postData = {
-          title,
-          location,
-          image,
-          locationDataInfo: locationData,
-        };
-        dispatch(addPost(postData));
-        sendPosts(postData);
-        navigation.navigate("Публікації", { data: postData });
-      }
-    } catch (error) {
-      console.error(error);
-    }
+    const postData = {
+      title,
+      location,
+      image,
+      locationDataInfo: locationDataInfo,
+    };
+    dispatch(addPost(postData));
+    sendPosts(postData);
+    navigation.navigate("Публікації", { data: postData });
+    // try {
+    //   const locationData = await getLocationData();
+    //   if (locationData) {
+    //     const postData = {
+    //       title,
+    //       location,
+    //       image,
+    //       locationDataInfo: locationData,
+    //     };
+    //     dispatch(addPost(postData));
+    //     sendPosts(postData);
+    //     navigation.navigate("Публікації", { data: postData });
+    //   }
+    // } catch (error) {
+    //   console.error(error);
+    // }
   };
 
   const deleteCreatedPost = () => {
-    // navigation.navigate("Публікації");
     setImage(null);
     setLocation("");
     setTitle("");
@@ -146,29 +150,40 @@ const CreatePostsScreen = ({ navigation }) => {
         {image ? (
           <Image style={styles.image} source={{ uri: image }} />
         ) : (
-          <Camera style={styles.photoContainer} type={type} ref={setCameraRef}>
-            <View style={styles.photoView}>
-              <TouchableOpacity
-                style={styles.flipContainer}
-                onPress={changeCameraType}
-              >
-                <Pressable
-                  onPress={takePictureHandler}
-                  style={styles.makePhotoBtn}
-                  disabled={photoTaken}
+          <View style={styles.photoContainer}>
+            <Camera
+              style={styles.photoContainer}
+              type={type}
+              ref={setCameraRef}
+            >
+              <View style={styles.photoView}>
+                <TouchableOpacity
+                  style={styles.flipContainer}
+                  onPress={changeCameraType}
                 >
-                  <Feather name="camera" size={24} color="black" />
-                </Pressable>
-                <Text
-                  style={{ fontSize: 18, marginBottom: 10, color: "white" }}
-                >
-                  {" "}
-                  Flip{" "}
-                </Text>
-              </TouchableOpacity>
-            </View>
-          </Camera>
+                  {photoLoading ? (
+                    <Loader />
+                  ) : (
+                    <Pressable
+                      onPress={takePictureHandler}
+                      style={styles.makePhotoBtn}
+                      disabled={photoTaken}
+                    >
+                      <Feather name="camera" size={24} color="black" />
+                    </Pressable>
+                  )}
+                  <Text
+                    style={{ fontSize: 18, marginBottom: 10, color: "white" }}
+                  >
+                    {" "}
+                    Flip{" "}
+                  </Text>
+                </TouchableOpacity>
+              </View>
+            </Camera>
+          </View>
         )}
+
         <View style={styles.changePhoto}>
           <Text style={{ textAlign: "left", color: "#b7b0b0" }}>
             {image ? "Редагувати фото" : "Завантажте фото"}

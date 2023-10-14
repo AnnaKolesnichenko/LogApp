@@ -30,7 +30,7 @@ const LoginScreen = ({ navigation }) => {
 
   const tokenSelected = useSelector((state) => state.authenticate.token);
   const dispatch = useDispatch();
-  console.log(tokenSelected);
+  //console.log(tokenSelected);
 
   const signInHandler = async (email, password) => {
     setIsUserLogging(true);

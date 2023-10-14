@@ -84,8 +84,8 @@ const BottomNavigation = () => {
                 <Pressable
                   style={({ pressed }) => pressed && styles.pressedLogout}
                   onPress={() => {
-                    navigation.navigate("Публікації");
-                    // navigation.pop();
+                    // navigation.navigate("Публікації");
+                    navigation.goBack();
                   }}
                 >
                   <AntDesign name="arrowleft" size={24} color="grey" />

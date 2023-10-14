@@ -6,7 +6,8 @@
     "location": "Kherson Region",
     "country": "Ukraine",
     "likes": 123,
-    "id": "i1"
+    "id": "i1",
+    "locationDataInfo": "46.951816, 31.970237"
   },
   {
     "title": "Море",
@@ -15,7 +16,8 @@
     "location": "Odessa Region",
     "country": "Ukraine",
     "likes": 77,
-    "id": "i2"
+    "id": "i2",
+    "locationDataInfo": "46.951816, 31.970237"
   },
   {
     "title": "Захід сонця",
@@ -24,7 +26,8 @@
     "location": "Mykolayiv Region",
     "country": "Ukraine",
     "likes": 157,
-    "id": "i3"
+    "id": "i3",
+    "locationDataInfo": "46.951816, 31.970237"
   },
   {
     "title": "Сніг",
@@ -33,7 +36,8 @@
     "location": "Mykolayiv Region",
     "country": "Ukraine",
     "likes": 253,
-    "id": "i4"
+    "id": "i4",
+    "locationDataInfo": "46.951816, 31.970237"
   },
   {
     "title": "Гриби",
@@ -42,8 +46,7 @@
     "location": "Kherson Region",
     "country": "Ukraine",
     "likes": 0,
-    "id": "i5"
+    "id": "i5",
+    "locationDataInfo": "46.951816, 31.970237"
   }
 ]
-
-[{"comments": undefined, "country": undefined, "id": "-NfeHM-fZqZbOKNjQs1S", "image": "file:///var/mobile/Containers/Data/Application/01FD9365-7613-46AC-BA83-009DDC5DA9BB/Library/Caches/ExponentExperienceData/%2540anonymous%252FPostsApp-afb5379d-949f-4eda-aa21-36318599938e/Camera/932B13E9-A059-4128-B4D7-B7421F60DFBB.jpg", "likes": undefined, "location": "Where the home is", "title": "Plane"}, {"comments": undefined, "country": undefined, "id": "-NfeHUNMaNoJQ4ICSvs5", "image": "file:///var/mobile/Containers/Data/Application/01FD9365-7613-46AC-BA83-009DDC5DA9BB/Library/Caches/ExponentExperienceData/%2540anonymous%252FPostsApp-afb5379d-949f-4eda-aa21-36318599938e/Camera/51D23192-5AAE-4424-82FE-684A108306A3.jpg", "likes": undefined, "location": "Beehive", "title": "Bee"}, {"comments": undefined, "country": undefined, "id": "-NgPdtxJ6Q4QfqfZMS2D", "image": "file:///var/mobile/Containers/Data/Application/01FD9365-7613-46AC-BA83-009DDC5DA9BB/Library/Caches/ExponentExperienceData/%2540anonymous%252FPostsApp-afb5379d-949f-4eda-aa21-36318599938e/Camera/192BB985-5FEB-4CD9-974C-68916CDD0214.jpg", "likes": undefined, "location": "Home", "title": "Pillow"}, {"comments": undefined, "country": undefined, "id": "-NgPoeC-Y3jY_8W1cE1m", "image": "file:///var/mobile/Containers/Data/Application/01FD9365-7613-46AC-BA83-009DDC5DA9BB/Library/Caches/ExponentExperienceData/%2540anonymous%252FPostsApp-afb5379d-949f-4eda-aa21-36318599938e/Camera/1DAB79DC-E035-45D2-9606-81ACF71A69D3.jpg", "likes": undefined, "location": "Where", "title": "Some"}]
