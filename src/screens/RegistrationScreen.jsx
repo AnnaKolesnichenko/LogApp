@@ -23,6 +23,12 @@ import Loader from "../components/Loader";
 import { useDispatch, useSelector } from "react-redux";
 import { authenticate, updateAsyncStorage } from "../../store/authReducer";
 
+import {
+  createUserWithEmailAndPassword,
+  onAuthStateChanged,
+} from "firebase/auth";
+import { auth } from "../../config";
+
 const RegistrationScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -32,26 +38,46 @@ const RegistrationScreen = ({ navigation }) => {
 
   const tokenSelected = useSelector((state) => state.authenticate.token);
   const user = useSelector((state) => state.authenticate.user);
-  //console.log(user);
-  // console.log(tokenSelected);
   const dispatch = useDispatch();
 
-  const signUpHandler = async (email, password) => {
+  const signUpHandler = async () => {
     setIsUserCreating(true);
     try {
-      const token = await createUser(email, password);
-      dispatch(authenticate.user([email, password]));
-      dispatch(authenticate(token));
-      // console.log(token);
+      await createUserWithEmailAndPassword(auth, email, password);
+      navigation.navigate("Home");
     } catch (error) {
-      Alert.alert(
-        "SignUp failed",
-        "Please check your input data and try again later"
-      );
+      Alert.alert("Signup failed", "Please check your input data");
     }
-    console.log(email, password);
-    setIsUserCreating(false);
   };
+
+  useEffect(() => {
+    const logingOut = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        navigation.navigate("Home");
+      } else {
+        Alert.alert("Not signed yet", "Register or Log in");
+      }
+    });
+    setIsUserCreating(false);
+    return () => logingOut();
+  }, []);
+
+  // const signUpHandler = async (email, password) => {
+  //   setIsUserCreating(true);
+  //   try {
+  //     const token = await createUser(email, password);
+  //     dispatch(authenticate.user([email, password]));
+  //     dispatch(authenticate(token));
+  //     // console.log(token);
+  //   } catch (error) {
+  //     Alert.alert(
+  //       "SignUp failed",
+  //       "Please check your input data and try again later"
+  //     );
+  //   }
+  //   console.log(email, password);
+  //   setIsUserCreating(false);
+  // };
 
   const clearInputs = () => {
     setEmail("");

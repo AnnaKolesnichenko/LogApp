@@ -26,27 +26,22 @@
 
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
+import { getAuth } from "firebase/auth";
+import { getFirestore } from "firebase/firestore";
+import { getStorage } from "firebase/storage";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyCf7TigVBJOjAQOcvXrJPCl7LuYx_0f2aE",
-  authDomain: "appposts-a5dbd.firebaseapp.com",
-  databaseURL:
-    "https://appposts-a5dbd-default-rtdb.europe-west1.firebasedatabase.app",
-  projectId: "appposts-a5dbd",
-  storageBucket: "appposts-a5dbd.appspot.com",
-  messagingSenderId: "837024893458",
-  appId: "1:837024893458:web:69df62e9b95028e05ae6cb",
+  apiKey: "AIzaSyDZw2wAgY3fzYkqp6o16BZwvA2zp2ZtHu0",
+  authDomain: "postsapplication.firebaseapp.com",
+  databaseURL: "https://postsapplication-default-rtdb.firebaseio.com",
+  projectId: "postsapplication",
+  storageBucket: "postsapplication.appspot.com",
+  messagingSenderId: "657504983024",
+  appId: "1:657504983024:web:e327d474c49c4ebc3aaf35",
 };
-
-const { getDefaultConfig } = require("@expo/metro-config");
-
-const defaultConfig = getDefaultConfig(__dirname);
-defaultConfig.resolver.assetExts.push("cjs");
-
-module.exports = defaultConfig;
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);

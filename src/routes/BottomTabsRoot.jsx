@@ -15,13 +15,26 @@ import PostsStack from "./PostsStack";
 import PostsScreen from "../screens/PostsScreen";
 import { useDispatch } from "react-redux";
 import { logout } from "../../store/authReducer";
+import { signOut } from "firebase/auth";
 import { createStackNavigator } from "@react-navigation/stack";
+import { auth } from "../../config";
 
 const BottomTabs = createBottomTabNavigator();
 const Stack = createStackNavigator();
 
-const BottomNavigation = () => {
+const BottomNavigation = ({ navigation }) => {
   const dispatch = useDispatch();
+
+  const signOut = async () => {
+    try {
+      await signOut(auth);
+      // dispatch(logout);
+      navigation.navigate("Login");
+    } catch (error) {
+      console.error("something went wrong", error);
+    }
+  };
+
   return (
     <BottomTabs.Navigator
       // initialRouteName="Публікації"
@@ -48,7 +61,7 @@ const BottomNavigation = () => {
               <View style={styles.logOut}>
                 <Pressable
                   style={({ pressed }) => pressed && styles.pressedLogout}
-                  onPress={() => dispatch(logout())}
+                  onPress={signOut}
                 >
                   <MaterialIcons name="logout" size={22} color="grey" />
                 </Pressable>
